@@ -24,7 +24,7 @@ class Navbar extends Component {
             <SearchBox searchSubmit={this.sendQueryStringToParent} />
           </li>
           <li className="navbar-list-item city-name">
-            <span className="">New York,US</span>
+            <span>{this.props.data.city}</span>
           </li>
           <li className="navbar-list-item">
             <UnitComponent

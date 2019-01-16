@@ -3,12 +3,6 @@ import { Sparklines, SparklinesLine, SparklinesSpots } from "react-sparklines";
 import "./GraphComponent.css";
 
 class GraphComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      sampleData: [18, 35, 40, 24, 22, 31, 33]
-    };
-  }
   render() {
     return (
       <div className="graph-container">
@@ -22,7 +16,7 @@ class GraphComponent extends Component {
           </span>
         </div>
         <div className="graph">
-          <Sparklines data={this.state.sampleData}>
+          <Sparklines data={this.props.data}>
             <SparklinesLine color="#fe1743" />
             <SparklinesSpots style={{ fill: "#ffffff" }} />
           </Sparklines>
