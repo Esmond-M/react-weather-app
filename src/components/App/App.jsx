@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Navbar from "../Navbar";
+import "./App.css";
 
 class App extends Component {
   constructor(props) {
@@ -6,17 +8,7 @@ class App extends Component {
     this.state = {};
   }
   render() {
-    return (
-      <div>
-        <span>
-          <i className="fab fa-react" />
-        </span>
-        <span>Weather App</span>
-        <span>
-          <i className="wi wi-day-sunny" />
-        </span>
-      </div>
-    );
+    return <Navbar />;
   }
 }
 
