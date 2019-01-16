@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "../Navbar";
+import TodayComponent from "../TodayComponent";
+import ListComponent from "../ListComponent";
+import GraphComponent from "../GraphComponent";
+
 import "./App.css";
 
 class App extends Component {
@@ -7,8 +11,22 @@ class App extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
-    return <Navbar />;
+    return (
+      <div className="app-container">
+        <div className="app-nav">
+          <Navbar />
+        </div>
+        <div className="app-today">
+          <TodayComponent />
+        </div>
+        <div className="app-list-graph">
+          <ListComponent />
+          <GraphComponent />
+        </div>
+      </div>
+    );
   }
 }
 
