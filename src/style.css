@@ -12,3 +12,12 @@ body {
 #root {
   height: 100vh;
 }
+.wi-blue {
+  color: #00acee;
+}
+.wi-yellow {
+  color: #fdc201;
+}
+.wi-gray {
+  color: #6c7a89;
+}
