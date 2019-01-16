@@ -9,14 +9,45 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      unit: "C",
+      queryString: ""
+    };
   }
+
+  onUnitChange = newUnit => {
+    this.setState(
+      {
+        unit: newUnit
+      },
+      this.notifyStateChange
+    );
+  };
+
+  onSearchSubmit = query => {
+    this.setState(
+      {
+        queryString: query
+      },
+      this.notifyStateChange
+    );
+  };
+
+  notifyStateChange = () => {
+    // Fetch data for new unit
+    // Fetch data for city/zipcode
+    console.log(this.state);
+  };
 
   render() {
     return (
       <div className="app-container">
         <div className="app-nav">
-          <Navbar />
+          <Navbar
+            searchSubmit={this.onSearchSubmit}
+            changeUnit={this.onUnitChange}
+            unit={this.state.unit}
+          />
         </div>
         <div className="app-today">
           <TodayComponent />
