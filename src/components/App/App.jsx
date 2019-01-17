@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Navbar from "../Navbar";
 import TodayComponent from "../TodayComponent";
 import ListComponent from "../ListComponent";
 import GraphComponent from "../GraphComponent";
+import axios from "axios";
 
 import "./App.css";
 
@@ -14,72 +14,41 @@ class App extends Component {
       unit: "C",
       queryString: "",
       latLng: [],
-      navbarData: {},
+      navbarData: {}, //this
       todayComponentData: {},
       listComponentData: [],
       graphComponentData: []
     };
   }
+
   componentDidMount() {
-    // 1. navigator.geolocation will provide coordinates
     const geolocation = navigator.geolocation;
     if (geolocation) {
-      // 3. This will be called when location access allowed
-      const permissionGranted = position => {
-        // We got position. Add it to state.
-        // call the notifyStateChange function to fetch data.
-        this.setState(
-          {
-            latLng: [position.coords.latitude, position.coords.longitude]
-          },
-          this.notifyStateChange
-        );
-      };
-
-      // 4. This is when denied
-      const permissionDenied = () => {
-        console.log("Permission Denied");
-      };
-
-      // 2. getCurrentPosition will propmpt the permission dialog
-      geolocation.getCurrentPosition(permissionGranted, permissionDenied);
+      geolocation.getCurrentPosition(
+        position => {
+          this.setState(
+            {
+              latLng: [position.coords.latitude, position.coords.longitude]
+            },
+            this.notifyStateChange
+          );
+        },
+        () => {
+          console.log("Permission Denied");
+        }
+      );
     } else {
       console.log("GeoLocation not supported...Update the browser fella");
     }
   }
 
-  notifyStateChange = () => {
-    // Fetch data for new unit
-    // Fetch data for city/zipcode
-    // Fetch data for lat lng
-    console.log(this.state);
-  };
-  fetchWeatherForecast = hasLatLng => {
-    const API_KEY = "9c098d2251d848d25e3e0d70b4a588de";
-    const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast/daily";
-    const queryParams = hasLatLng
-      ? `lat=${this.state.latLng[0]}&lon=${this.state.latLng[1]}`
-      : `q=${this.state.queryString}`;
-    const unitType = this.state.unit === "C" ? "metric" : "imperial";
-
-    const url = `${BASE_URL}?${queryParams}&units=${unitType}&cnt=7&appid=${API_KEY}`;
-
-    return axios
-      .get(url)
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => {
-        console.log("Error:", error);
-      });
-  };
   onUnitChange = newUnit => {
     this.setState(
       {
         unit: newUnit
       },
       this.notifyStateChange
-    );
+    ); //this
   };
 
   onSearchSubmit = query => {
@@ -89,7 +58,7 @@ class App extends Component {
         latLng: []
       },
       this.notifyStateChange
-    );
+    ); //this
   };
 
   notifyStateChange = () => {
@@ -99,7 +68,7 @@ class App extends Component {
     if (hasLatLng || hasCityOrZipcode) {
       this.fetchWeatherForecast(hasLatLng)
         .then(forecastData => {
-          console.log("Forecast Data:", forecastData);
+          // console.log('Forecast Data:', forecastData);
           // Extract component specific data...
           const navbarData = this.extractDataForNavbar(forecastData);
           const todayComponentData = this.extractDataForTodayComponent(
@@ -122,6 +91,27 @@ class App extends Component {
         });
     }
   };
+
+  fetchWeatherForecast = hasLatLng => {
+    const API_KEY = "9c098d2251d848d25e3e0d70b4a588de";
+    const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+    const queryParams = hasLatLng
+      ? `lat=${this.state.latLng[0]}&lon=${this.state.latLng[1]}`
+      : `q=${this.state.queryString}`;
+    const unitType = this.state.unit === "C" ? "metric" : "imperial";
+
+    const url = `${BASE_URL}?${queryParams}&units=${unitType}&cnt=7&appid=${API_KEY}`;
+
+    return axios
+      .get(url)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        console.log("Error:", error);
+      });
+  };
+
   extractDataForNavbar = forecastData => {
     return {
       city: `${forecastData.city.name}, ${forecastData.city.country}`
@@ -182,20 +172,6 @@ class App extends Component {
     };
   };
 
-  // Takes date object or unix timestamp in ms and returns day string
-  getDay = time => {
-    const daysNames = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday ",
-      "Friday",
-      "Saturday"
-    ];
-    return daysNames[new Date(time).getDay()];
-  };
-
   extractDataForListAndGraphComponent = forecastData => {
     const listComponentData = [];
     const graphComponentData = [];
@@ -212,13 +188,26 @@ class App extends Component {
     });
 
     // Remove first element as that represents today's weather
-    // ListComponent displays next 6 days data
     listComponentData.shift();
 
     return {
       listComponentData,
       graphComponentData
     };
+  };
+
+  // Takes date object or unix timestamp in ms and returns day string
+  getDay = time => {
+    const dayNames = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday ",
+      "Friday",
+      "Saturday"
+    ];
+    return dayNames[new Date(time).getDay()];
   };
 
   render() {
@@ -249,6 +238,7 @@ class App extends Component {
         </div>
       </React.Fragment>
     );
+
     return (
       <div className="app-container">
         <div className="app-nav">
