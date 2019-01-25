@@ -93,8 +93,8 @@ class App extends Component {
   };
 
   fetchWeatherForecast = hasLatLng => {
-    const API_KEY = "9c098d2251d848d25e3e0d70b4a588de";
-    const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+    const API_KEY = "789c7a808690dc32dbf1324ad4b2e1e3";
+    const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast/daily";
     const queryParams = hasLatLng
       ? `lat=${this.state.latLng[0]}&lon=${this.state.latLng[1]}`
       : `q=${this.state.queryString}`;
