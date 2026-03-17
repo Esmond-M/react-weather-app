@@ -16,7 +16,6 @@ class SearchBox extends Component {
 
     handleSearch = (e) => {
         e.preventDefault();
-        console.log('Fetch weather data for:', this.state.query);
         this.props.searchSubmit(this.state.query);
     }
 
@@ -30,6 +29,7 @@ class SearchBox extends Component {
                         name="searchBox"
                         id="searchBox"
                         placeholder="Enter City or Zipcode"
+                        maxLength={100}
                         onChange={this.handleQueryStringChange} />
                     <span
                         className="search-button fa fa-search"

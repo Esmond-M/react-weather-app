@@ -13,6 +13,11 @@ const webpackConfig = {
     module: {
         rules: []
     },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.OPENWEATHER_API_KEY': JSON.stringify(process.env.OPENWEATHER_API_KEY || '')
+        })
+    ],
     devServer: {
         contentBase: DIR_DIST
     }

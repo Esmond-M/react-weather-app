@@ -10,6 +10,6 @@ export const getIconClassName = (weatherId) => {
     const hasWeatherId = (idArray, id) => (idArray.indexOf(id) > -1);
     if (hasWeatherId(blue, weatherId)) return CLASS_BLUE;
     else if (hasWeatherId(yellow, weatherId)) return CLASS_YELLOW;
-    else if (hasWeatherId, weatherId) return CLASS_GRAY;
+    else if (hasWeatherId(gray, weatherId)) return CLASS_GRAY;
     else return CLASS_BLUE;
 }
