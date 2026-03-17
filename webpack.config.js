@@ -19,7 +19,7 @@ const webpackConfig = {
         })
     ],
     devServer: {
-        contentBase: DIR_DIST
+        static: DIR_DIST
     }
 }
 
