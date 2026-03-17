@@ -1,34 +1,40 @@
 {
   "name": "weather",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A Simple weather app",
+  "homepage": "https://esmondmccain.com/react-projects/weather-app/",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --colors --mode=development",
-    "build": "webpack --mode=production"
+    "start": "webpack serve --mode=development",
+    "build": "webpack --mode=production",
+    "zip": "powershell -Command \"Compress-Archive -Path dist/* -DestinationPath dist.zip -Force; Write-Host 'Created dist.zip'\"",
+    "deploy": "gh-pages -d dist"
   },
-  "keywords": [],
-  "author": "Esmond",
+  "keywords": [
+    "react",
+    "open-weather-map-api"
+  ],
+  "author": "Esmond Mccain",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
+    "@babel/core": "^7.29.0",
+    "@babel/plugin-transform-class-properties": "^7.28.6",
+    "@babel/preset-env": "^7.29.2",
+    "@babel/preset-react": "^7.28.5",
+    "babel-loader": "^9.2.1",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^2.1.0",
-    "style-loader": "^0.23.1",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "css-loader": "^7.1.4",
+    "gh-pages": "^1.1.0",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.105.4",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.3"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "babel-core": "^6.26.3",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "axios": "^0.17.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "react-sparklines": "^1.7.0"
   }
 }

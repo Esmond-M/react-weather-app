@@ -8,6 +8,7 @@ class Navbar extends Component {
     super(props);
     this.state = {};
   }
+
   sendNewUnitToParent = newUnit => {
     this.props.changeUnit(newUnit);
   };
